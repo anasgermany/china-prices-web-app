@@ -7,6 +7,7 @@ import '../widgets/product_card_simple.dart';
 import '../models/product_model.dart';
 import '../routes.dart';
 import '../services/web_url_service.dart';
+import '../services/analytics_service.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -26,6 +27,16 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final provider = Provider.of<AppProvider>(context, listen: false);
       provider.initialize();
+      
+      // Track page view for analytics
+      AnalyticsService.trackPageView(
+        pageName: 'home_screen',
+        pageTitle: 'China Prices - Home',
+        parameters: {
+          'screen_type': 'home',
+          'user_type': 'visitor',
+        },
+      );
     });
   }
 
@@ -370,6 +381,13 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
     } else {
       // Search with fresh data
       await provider.searchProducts(query);
+      
+      // Track search for analytics
+      AnalyticsService.trackSearch(
+        searchTerm: query,
+        resultCount: provider.searchResults.length,
+        category: _selectedCategory != 'All' ? _selectedCategory : null,
+      );
     }
 
     // Force UI refresh
@@ -403,9 +421,27 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
       // For specific categories, load fresh products
       provider.loadProductsByCategory(category);
     }
+    
+    // Track category selection for analytics
+    AnalyticsService.trackEvent(
+      eventName: 'category_selected',
+      parameters: {
+        'category_name': category,
+        'screen': 'home',
+      },
+    );
   }
 
   void _onProductTap(Product product) {
+    // Track product view for analytics
+    AnalyticsService.trackProductInteraction(
+      productId: product.productId,
+      action: 'view',
+      productName: product.productDesc,
+      category: _selectedCategory != 'All' ? _selectedCategory : null,
+      price: product.numericPrice.toDouble(),
+    );
+    
     Navigator.pushNamed(
       context,
       AppRoutes.productDetail,

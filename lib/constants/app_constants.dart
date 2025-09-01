@@ -70,7 +70,12 @@ class AppConstants {
   // WEB ADVERTISING (Replace with your web ad IDs)
   // ========================================
   static const String googleAdSenseId = 'ca-pub-XXXXXXXXXXXXXXXX';
-  static const String googleAnalyticsId = 'G-XXXXXXXXXX';
+  
+  // ========================================
+  // GOOGLE ANALYTICS (Replace with your Measurement ID)
+  // ========================================
+  static const String googleAnalyticsId = 'G-VXF219J1RY'; // ✅ Tu Measurement ID de Google Analytics
+  static const bool enableGoogleAnalytics = true; // ✅ Activar/desactivar Analytics
   
   // ========================================
   // STORE URLs & AFFILIATE LINKS

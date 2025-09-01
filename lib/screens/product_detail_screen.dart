@@ -5,6 +5,7 @@ import '../models/product_model.dart';
 import '../constants/app_constants.dart';
 import '../services/web_url_service.dart';
 import '../services/app_provider_web.dart';
+import '../services/analytics_service.dart';
 
 class ProductDetailScreen extends StatefulWidget {
   final Product product;
@@ -38,6 +39,20 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
+    
+    // Track page view for analytics
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      AnalyticsService.trackPageView(
+        pageName: 'product_detail',
+        pageTitle: 'Product Detail - ${widget.product.productDesc}',
+        parameters: {
+          'screen_type': 'product_detail',
+          'product_id': widget.product.productId,
+          'product_name': widget.product.productDesc,
+          'category': 'product_view',
+        },
+      );
+    });
   }
 
   @override
@@ -948,6 +963,14 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
   void _launchProductUrl(BuildContext context, String url) async {
     if (url.isNotEmpty) {
       try {
+        // Track affiliate click for analytics
+        AnalyticsService.trackAffiliateClick(
+          productId: widget.product.productId.toString(),
+          productName: widget.product.productDesc,
+          affiliateUrl: url,
+          category: 'product_purchase',
+        );
+        
         final success = await WebUrlService.openUrlInNewTab(url);
 
         if (success) {
@@ -986,6 +1009,13 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
     final provider = Provider.of<AppProvider>(context, listen: false);
     await provider.addToFavorites(widget.product);
 
+    // Track favorites action for analytics
+    AnalyticsService.trackFavorites(
+      action: 'add',
+      productId: widget.product.productId.toString(),
+      productName: widget.product.productDesc,
+    );
+
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text('Added ${widget.product.productDesc} to favorites'),
@@ -995,6 +1025,13 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
           textColor: Colors.white,
           onPressed: () async {
             await provider.removeFromFavorites(widget.product.productId);
+            
+            // Track undo action for analytics
+            AnalyticsService.trackFavorites(
+              action: 'remove',
+              productId: widget.product.productId.toString(),
+              productName: widget.product.productDesc,
+            );
           },
         ),
       ),
@@ -1074,6 +1111,12 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
   void _launchGooglePlayStore() {
     final googlePlayUrl =
         'https://play.google.com/store/apps/details?id=com.marconlineshopping.humanhairwigs';
+
+    // Track app download for analytics
+    AnalyticsService.trackAppDownload(
+      platform: 'android',
+      downloadUrl: googlePlayUrl,
+    );
 
     // For web, we'll use the WebUrlService to open in new tab
     WebUrlService.openUrlInNewTab(googlePlayUrl).then((success) {

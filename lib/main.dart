@@ -4,9 +4,27 @@ import 'package:provider/provider.dart';
 import 'constants/app_constants.dart';
 import 'routes.dart';
 import 'services/app_provider_web.dart';
+import 'services/analytics_service.dart';
+import 'config/analytics_config.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  // Initialize Google Analytics if enabled
+  if (AnalyticsConfig.enabled && AnalyticsConfig.measurementId.isNotEmpty) {
+    try {
+      await AnalyticsService.initialize(AnalyticsConfig.measurementId);
+      print('✅ Google Analytics initialized with ID: ${AnalyticsConfig.measurementId}');
+      
+      if (AnalyticsConfig.debugMode) {
+        print('🔍 Analytics Debug Config: ${AnalyticsConfig.debugConfig}');
+      }
+    } catch (e) {
+      print('❌ Error initializing Google Analytics in main(): $e');
+    }
+  } else {
+    print('⚠️ Google Analytics not configured or disabled');
+  }
 
   runApp(const MyApp());
 }

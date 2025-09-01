@@ -30,6 +30,10 @@ dependencies:
 
   # Web notifications
   universal_html: ^2.2.4
+  
+  # Analytics and tracking
+  google_analytics: ^0.0.3
+  firebase_analytics: ^11.3.1
 
 dev_dependencies:
   flutter_test:

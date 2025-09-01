@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../constants/app_constants.dart';
 import '../services/app_provider_web.dart';
+import '../services/analytics_service.dart';
 import '../widgets/product_card_simple.dart';
 import '../models/product_model.dart';
 import '../routes.dart';
@@ -23,6 +24,18 @@ class _FavoritesScreenState extends State<FavoritesScreen>
     super.initState();
     WidgetsBinding.instance.addObserver(this);
     _loadFavorites();
+    
+    // Track page view for analytics
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      AnalyticsService.trackPageView(
+        pageName: 'favorites_screen',
+        pageTitle: 'My Favorites',
+        parameters: {
+          'screen_type': 'favorites',
+          'user_type': 'registered',
+        },
+      );
+    });
   }
 
   @override
