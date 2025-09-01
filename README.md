@@ -1,246 +1,191 @@
-# China Prices - Flutter App
+# 🛍️ China Prices Web App
 
-Una aplicación Flutter 3 moderna y responsiva que permite a los usuarios buscar productos y comparar precios en diferentes tiendas chinas, basándose en datos JSON alojados en GitHub con enlaces de afiliados.
+A modern Flutter Web application for comparing prices across Chinese e-commerce platforms with a beautiful, responsive UI and dynamic product loading.
 
-## 🚀 Características
+## ✨ Features
 
-### 🔍 Búsqueda Inteligente
-- Búsqueda en tiempo real de productos
-- Filtrado por nombre de producto
-- Historial de búsquedas local
-- Resultados con imágenes y precios
+- **🔄 Dynamic Products**: Fresh products loaded every time you visit or refresh
+- **🎨 Modern UI/UX**: Built with Flutter 3 and Material 3 design principles
+- **📱 Responsive Design**: Works perfectly on desktop, tablet, and mobile
+- **🔍 Smart Search**: Real-time search with debouncing for better performance
+- **❤️ Favorites System**: Save and manage your favorite products
+- **🏷️ Category Filtering**: Browse products by different categories
+- **🔗 Affiliate Links**: Direct links to AliExpress with proper tracking
+- **⚡ Fast Performance**: Optimized for web with efficient data loading
 
-### 💰 Comparación de Precios
-- Comparación automática entre múltiples tiendas chinas
-- AliExpress siempre aparece primero (prioridad)
-- Ordenamiento por precio de menor a mayor
-- Enlaces de afiliados directos
+## 🚀 Getting Started
 
-### 🏪 Tiendas Soportadas
-- **AliExpress** (prioridad)
-- Taobao
-- JD.com
-- DHgate
-- Pinduoduo
-- VIP.com
-- Tmall
+### Prerequisites
 
-### ❤️ Favoritos
-- Guardar productos favoritos localmente
-- Gestión de favoritos con interfaz intuitiva
-- Sincronización automática
+- Flutter 3.10.0 or higher
+- Dart 3.0.0 or higher
+- Chrome browser (for web development)
 
-### 📱 Diseño Moderno
-- Material Design 3
-- Interfaz responsiva (móvil y tablet)
-- Animaciones fluidas
-- Colores cálidos y suaves
-- Tipografía Google Fonts (Poppins)
+### Installation
 
-### 💰 Monetización
-- Google AdMob integrado
-- App Open Ads al inicio
-- Banner ads adaptativos
-- Interstitial ads después de 5 búsquedas
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/your-username/china-prices-web-app.git
+   cd china-prices-web-app
+   ```
 
-## 🏗️ Estructura del Proyecto
+2. **Install dependencies**
+   ```bash
+   flutter pub get
+   ```
+
+3. **Run the app**
+   ```bash
+   flutter run -d chrome --web-port 8080
+   ```
+
+4. **Open in browser**
+   Navigate to `http://localhost:8080`
+
+## 🏗️ Project Structure
 
 ```
 lib/
-├── constants/
-│   └── app_constants.dart          # Constantes de la aplicación
-├── models/
-│   ├── product_model.dart          # Modelo de producto
-│   └── price_comparison_model.dart # Modelo de comparación de precios
-├── services/
-│   ├── api_service.dart            # Servicio de API
-│   ├── storage_service.dart        # Servicio de almacenamiento local
-│   ├── ad_service.dart             # Servicio de anuncios
-│   ├── url_launcher_service.dart   # Servicio de enlaces
-│   └── app_provider.dart           # Provider principal
-├── screens/
-│   ├── splash_screen.dart          # Pantalla de inicio
-│   ├── home_screen.dart            # Pantalla principal
-│   ├── search_screen.dart          # Pantalla de búsqueda
-│   └── favorites_screen.dart       # Pantalla de favoritos
-├── widgets/
-│   ├── product_card.dart           # Tarjeta de producto
-│   ├── price_comparison_card.dart  # Tarjeta de comparación
-│   ├── category_card.dart          # Tarjeta de categoría
-│   └── banner_ad_widget.dart       # Widget de anuncios
-├── routes.dart                     # Configuración de rutas
-└── main.dart                       # Punto de entrada
+├── constants/          # App constants and configuration
+├── models/            # Data models
+├── screens/           # UI screens
+├── services/          # Business logic and API services
+├── widgets/           # Reusable UI components
+└── main.dart          # App entry point
 ```
 
-## 📊 Modelos de Datos
+## 🎯 Key Components
 
-### Producto (JSON 1)
-```json
-{
-    "ProductId": 1005004572453697,
-    "Image Url": "https://ae04.alicdn.com/kf/S87fb4422f4664de6aa23e486c1efcddf7.jpg",
-    "Video Url": "",
-    "Product Desc": "Takara Tomy Tomica 67 Toyota Hilux Model Sports Racing Car Toy Gift for Boys and Girls Children",
-    "Origin Price": "USD 4.75",
-    "Discount Price": "USD 4.27",
-    "Discount": "10%",
-    "Currency": "USD",
-    "Commission Rate": 7,
-    "Commission": "USD 0.30",
-    "Sales180Day": 26,
-    "Positive Feedback": "100.0%",
-    "Promotion Url": "https://s.click.aliexpress.com/e/_DEnQJ03"
+### Screens
+- **Home Screen**: Main product browsing with search and categories
+- **Product Detail**: Beautiful product page with modern design
+- **Favorites**: Manage your saved products
+- **Search**: Advanced search functionality
+
+### Services
+- **AppProvider**: State management and business logic
+- **ApiService**: Product data fetching
+- **WebUrlService**: Web-specific URL handling
+- **WebStorageService**: Local storage for web
+
+## 🔧 Configuration
+
+### Categories
+Edit `lib/constants/app_constants.dart` to customize:
+- Category names
+- JSON data sources
+- App colors and themes
+
+### Product Data
+The app loads products from JSON files. You can:
+- Add new categories
+- Update product sources
+- Customize data structure
+
+## 🚀 Deployment
+
+### Firebase Hosting (Recommended)
+1. Install Firebase CLI
+2. Run `firebase login`
+3. Run `firebase deploy`
+
+### Other Platforms
+- Netlify
+- Vercel
+- GitHub Pages
+
+## 🎨 Customization
+
+### Colors
+Update the color scheme in `lib/constants/app_constants.dart`:
+```dart
+class AppConstants {
+  static const Color primaryColor = Color(0xFF2196F3);
+  static const Color backgroundColor = Color(0xFFF5F5F5);
+  // ... more colors
 }
 ```
 
-### Comparación de Precios (JSON 2)
-```json
-[
-  {
-    "name": "Camisa blanca",
-    "image_url": "https://example.com/camisa.jpg",
-    "prices": [
-      { "store_name": "AliExpress", "price": 12.99, "affiliate_url": "https://aliexpress.com/product" },
-      { "store_name": "Taobao", "price": 11.50, "affiliate_url": "https://taobao.com/product" },
-      { "store_name": "Tmall", "price": 13.20, "affiliate_url": "https://tmall.com/product" }
-    ]
-  }
-]
-```
-
-## 🛠️ Configuración
-
-### Prerrequisitos
-- Flutter 3.0 o superior
-- Dart 3.0 o superior
-- Android Studio / VS Code
-
-### Instalación
-
-1. **Clonar el repositorio**
-```bash
-git clone <repository-url>
-cd china_prices
-```
-
-2. **Instalar dependencias**
-```bash
-flutter pub get
-```
-
-3. **Configurar AdMob** (opcional)
-   - Reemplazar los IDs de AdMob en `lib/constants/app_constants.dart`
-   - Configurar `android/app/src/main/AndroidManifest.xml` para AdMob
-
-4. **Ejecutar la aplicación**
-```bash
-flutter run
-```
-
-### Configuración de AdMob
-
-1. Crear cuenta en [Google AdMob](https://admob.google.com/)
-2. Crear una nueva aplicación
-3. Obtener los IDs de anuncios
-4. Reemplazar en `lib/constants/app_constants.dart`:
-
+### Typography
+The app uses Google Fonts (Poppins). Customize in `lib/main.dart`:
 ```dart
-static const String adMobAppId = 'ca-app-pub-XXXXXXXXXX~XXXXXXXXXX';
-static const String adMobBannerId = 'ca-app-pub-XXXXXXXXXX/XXXXXXXXXX';
-static const String adMobInterstitialId = 'ca-app-pub-XXXXXXXXXX/XXXXXXXXXX';
-static const String adMobAppOpenId = 'ca-app-pub-XXXXXXXXXX/XXXXXXXXXX';
+textTheme: GoogleFonts.poppinsTextTheme(),
 ```
 
-## 🔧 Dependencias
+## 🔍 Search Functionality
 
-```yaml
-dependencies:
-  flutter:
-    sdk: flutter
-  http: ^1.1.0                    # Peticiones HTTP
-  url_launcher: ^6.2.1            # Abrir enlaces
-  google_mobile_ads: ^4.0.0       # Google AdMob
-  shared_preferences: ^2.2.2      # Almacenamiento local
-  provider: ^6.1.1                # Manejo de estado
-  google_fonts: ^6.1.0            # Tipografía
-  flutter_animate: ^4.5.0         # Animaciones
-  cached_network_image: ^3.3.0    # Caché de imágenes
-  shimmer: ^3.0.0                 # Efectos de carga
-```
+The search system includes:
+- **Real-time search** with debouncing
+- **Multi-word matching** for better results
+- **Category filtering** integration
+- **Search history** (coming soon)
 
-## 📱 Funcionalidades Principales
+## ❤️ Favorites System
 
-### Búsqueda de Productos
-- Búsqueda en tiempo real
-- Filtrado inteligente
-- Historial de búsquedas
-- Resultados con imágenes y precios
+- **Local storage** for web compatibility
+- **Add/Remove** products easily
+- **Persistent data** across sessions
+- **Quick access** from home screen
 
-### Comparación de Precios
-- AliExpress siempre primero
-- Ordenamiento por precio
-- Enlaces de afiliados directos
-- Búsqueda en tiendas sin producto
+## 📱 Responsive Design
 
-### Gestión de Favoritos
-- Guardar productos favoritos
-- Interfaz intuitiva
-- Almacenamiento local
-- Sincronización automática
+The app automatically adapts to different screen sizes:
+- **Desktop**: 4-column grid layout
+- **Tablet**: 3-column grid layout  
+- **Mobile**: 1-2 column grid layout
 
-### Anuncios Integrados
-- App Open Ads al inicio
-- Banner ads adaptativos
-- Interstitial ads programadas
-- Configuración flexible
+## 🚀 Performance Features
 
-## 🎨 Diseño UI/UX
+- **Lazy loading** of product images
+- **Efficient state management** with Provider
+- **Optimized search** with debouncing
+- **Smart caching** of product data
 
-### Colores
-- **Primario**: `#FF6B35` (Naranja cálido)
-- **Secundario**: `#FF8E53` (Naranja claro)
-- **Acento**: `#FFB347` (Amarillo naranja)
-- **Fondo**: `#F8F9FA` (Gris muy claro)
-- **Superficie**: `#FFFFFF` (Blanco)
+## 🐛 Troubleshooting
 
-### Tipografía
-- **Familia**: Poppins (Google Fonts)
-- **Pesos**: Regular, Medium, SemiBold, Bold
-- **Tamaños**: 12px - 32px
+### Common Issues
 
-### Componentes
-- Tarjetas con bordes redondeados
-- Sombras suaves
-- Animaciones fluidas
-- Botones modernos
-- Iconos Material Design
+1. **Products not loading**
+   - Check internet connection
+   - Verify JSON URLs in constants
+   - Check browser console for errors
 
-## 🚀 Despliegue
+2. **Search not working**
+   - Ensure search controller is properly initialized
+   - Check AppProvider state management
+   - Verify search method calls
 
-### Android
-```bash
-flutter build apk --release
-```
+3. **Build errors**
+   - Run `flutter clean`
+   - Run `flutter pub get`
+   - Check Flutter version compatibility
 
-### iOS
-```bash
-flutter build ios --release
-```
+## 🤝 Contributing
 
-## 📄 Licencia
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
-Este proyecto está bajo la Licencia MIT. Ver el archivo `LICENSE` para más detalles.
+## 📝 License
 
-## 🤝 Contribuciones
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-Las contribuciones son bienvenidas. Por favor, abre un issue o pull request.
+## 🙏 Acknowledgments
 
-## 📞 Soporte
+- Flutter team for the amazing framework
+- Material Design team for design guidelines
+- Google Fonts for beautiful typography
+- The Flutter community for inspiration
 
-Para soporte técnico o preguntas, contacta a través de:
-- Email: [tu-email@ejemplo.com]
-- GitHub Issues: [link-al-repositorio]
+## 📞 Support
+
+If you have any questions or need help:
+- Open an issue on GitHub
+- Check the documentation
+- Review the code examples
 
 ---
 
-**China Prices** - Compara precios en tiendas chinas de forma inteligente y moderna.
+**Made with ❤️ using Flutter Web**
