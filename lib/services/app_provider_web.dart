@@ -42,8 +42,11 @@ class AppProvider extends ChangeNotifier {
     try {
       print('AppProvider: Loading fresh products from all category JSONs...');
       
-      // Get all unique JSON URLs from categories
-      final Set<String> jsonUrls = AppConstants.categoryJsonLinks.values.toSet();
+      // Get all unique JSON URLs from editableCategories
+      final Set<String> jsonUrls = AppConstants.editableCategories
+          .map((cat) => cat['jsonUrl'] as String)
+          .where((url) => url.isNotEmpty)
+          .toSet();
       print('AppProvider: Found ${jsonUrls.length} unique JSON URLs to load');
       
       List<Product> allProducts = [];
@@ -104,8 +107,11 @@ class AppProvider extends ChangeNotifier {
     try {
       print('AppProvider: Loading fresh data for search...');
       
-      // Get all unique JSON URLs from categories
-      final Set<String> jsonUrls = AppConstants.categoryJsonLinks.values.toSet();
+      // Get all unique JSON URLs from editableCategories
+      final Set<String> jsonUrls = AppConstants.editableCategories
+          .map((cat) => cat['jsonUrl'] as String)
+          .where((url) => url.isNotEmpty)
+          .toSet();
       print('AppProvider: Found ${jsonUrls.length} unique JSON URLs to search');
       
       List<Product> allProducts = [];
@@ -174,29 +180,33 @@ class AppProvider extends ChangeNotifier {
       print('AppProvider: Loading fresh products for category: $category');
       _setLoading(true);
       
-      final categoryJsonUrl = AppConstants.categoryJsonLinks[category];
-      String jsonUrl;
+      // Find the category in editableCategories
+      final categoryData = AppConstants.editableCategories.firstWhere(
+        (cat) => cat['name'] == category,
+        orElse: () => {'jsonUrl': ''},
+      );
       
-      if (categoryJsonUrl == null || categoryJsonUrl.isEmpty) {
-        // Fallback to default JSON if no specific link found
-        jsonUrl = AppConstants.categoryJsonLinks.values.first;
+      String jsonUrl = categoryData['jsonUrl'] ?? '';
+      
+      if (jsonUrl.isEmpty) {
+        // Fallback to first available JSON if no specific link found
+        jsonUrl = AppConstants.editableCategories.first['jsonUrl'] ?? '';
         print('No JSON link found for category: $category, using default: $jsonUrl');
       } else {
-        jsonUrl = categoryJsonUrl;
         print('Using category-specific JSON for $category: $jsonUrl');
       }
       
-      // Load ALL products from the category-specific JSON without filtering
+      // Load products from the category-specific JSON
       List<Product> categoryProducts = [];
       
       try {
         print('Loading fresh products from category JSON: $jsonUrl');
         final allProducts = await apiService.fetchProducts(jsonUrl);
-        print('Found ${allProducts.length} fresh products in category JSON');
+        print('Found ${allProducts.length} fresh products in category JSON for $category');
         
         // Shuffle products for variety
         allProducts.shuffle(_random);
-        print('AppProvider: Shuffled category products for variety');
+        print('AppProvider: Shuffled ${allProducts.length} category products for variety');
         
         // Take a subset of products to avoid overwhelming the UI
         final maxProducts = AppConstants.maxCategoryProducts;
@@ -213,7 +223,7 @@ class AppProvider extends ChangeNotifier {
         // If category-specific JSON fails, try with default JSON
         try {
           print('Trying default JSON as fallback...');
-          final defaultProducts = await apiService.fetchProducts(AppConstants.categoryJsonLinks.values.first);
+          final defaultProducts = await apiService.fetchProducts(AppConstants.editableCategories.first['jsonUrl'] ?? '');
           print('Found ${defaultProducts.length} fresh products in default JSON');
           
           // Shuffle default products
