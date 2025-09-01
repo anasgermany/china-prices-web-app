@@ -179,80 +179,50 @@ class AppProvider extends ChangeNotifier {
     }
   }
 
-  // Load products by category with fresh data
+  // Load products by category with fresh data - NOW ALL CATEGORIES SHOW ALL PRODUCTS
   Future<void> loadProductsByCategory(String category) async {
     try {
-      print('AppProvider: Loading fresh products for category: $category');
+      print('AppProvider: Loading ALL products for category: $category (showing all JSONs)');
       _setLoading(true);
 
-      // Find the category in editableCategories
-      final categoryData = AppConstants.editableCategories.firstWhere(
-        (cat) => cat['name'] == category,
-        orElse: () => {'jsonUrl': ''},
-      );
+      // Get all unique JSON URLs from editableCategories
+      final Set<String> jsonUrls = AppConstants.editableCategories
+          .map((cat) => cat['jsonUrl'] as String)
+          .where((url) => url.isNotEmpty)
+          .toSet();
 
-      String jsonUrl = categoryData['jsonUrl'] ?? '';
+      print('AppProvider: Found ${jsonUrls.length} unique JSON URLs to load for category: $category');
 
-      if (jsonUrl.isEmpty) {
-        // Fallback to first available JSON if no specific link found
-        jsonUrl = AppConstants.editableCategories.first['jsonUrl'] ?? '';
-        print(
-            'No JSON link found for category: $category, using default: $jsonUrl');
-      } else {
-        print('Using category-specific JSON for $category: $jsonUrl');
-      }
+      List<Product> allCategoryProducts = [];
 
-      // Load products from the category-specific JSON
-      List<Product> categoryProducts = [];
-
-      try {
-        print('Loading fresh products from category JSON: $jsonUrl');
-        final allProducts = await apiService.fetchProducts(jsonUrl);
-        print(
-            'Found ${allProducts.length} fresh products in category JSON for $category');
-
-        // Shuffle products for variety
-        allProducts.shuffle(_random);
-        print(
-            'AppProvider: Shuffled ${allProducts.length} category products for variety');
-
-        // Take a subset of products to avoid overwhelming the UI
-        final maxProducts = AppConstants.maxCategoryProducts;
-        if (allProducts.length > maxProducts) {
-          print(
-              'Limiting to $maxProducts shuffled products for better UI performance');
-          categoryProducts = allProducts.take(maxProducts).toList();
-        } else {
-          categoryProducts = allProducts;
-        }
-      } catch (e) {
-        print('Error loading products from category JSON: $e');
-
-        // If category-specific JSON fails, try with default JSON
+      // Load products from ALL category JSONs (like "All" category)
+      for (String jsonUrl in jsonUrls) {
         try {
-          print('Trying default JSON as fallback...');
-          final defaultProducts = await apiService.fetchProducts(
-              AppConstants.editableCategories.first['jsonUrl'] ?? '');
-          print(
-              'Found ${defaultProducts.length} fresh products in default JSON');
-
-          // Shuffle default products
-          defaultProducts.shuffle(_random);
-
-          final maxProducts = AppConstants.maxCategoryProducts;
-          if (defaultProducts.length > maxProducts) {
-            categoryProducts = defaultProducts.take(maxProducts).toList();
-          } else {
-            categoryProducts = defaultProducts;
-          }
-        } catch (fallbackError) {
-          print('Fallback JSON also failed: $fallbackError');
-          categoryProducts = [];
+          print('AppProvider: Loading products from: $jsonUrl for category: $category');
+          final products = await apiService.fetchProducts(jsonUrl);
+          print('AppProvider: Loaded ${products.length} products from $jsonUrl for category: $category');
+          allCategoryProducts.addAll(products);
+        } catch (e) {
+          print('AppProvider: Error loading from $jsonUrl for category: $category: $e');
         }
       }
 
-      print(
-          'Total fresh and shuffled products loaded for category "$category": ${categoryProducts.length}');
+      // Shuffle ALL products for variety (like "All" category)
+      allCategoryProducts.shuffle(_random);
+      print('AppProvider: Shuffled ${allCategoryProducts.length} total products for category: $category');
+
+      // Take a subset of products to avoid overwhelming the UI
+      final maxProducts = AppConstants.maxCategoryProducts;
+      List<Product> categoryProducts;
+
+      if (allCategoryProducts.length > maxProducts) {
+        print('Limiting to $maxProducts shuffled products for better UI performance');
+        categoryProducts = allCategoryProducts.take(maxProducts).toList();
+      } else {
+        categoryProducts = allCategoryProducts;
+      }
+
+      print('Total fresh and shuffled products loaded for category "$category": ${categoryProducts.length} (from all JSONs)');
 
       _searchResults = categoryProducts;
       notifyListeners();
