@@ -242,6 +242,51 @@ class AppConstants {
           'https://raw.githubusercontent.com/anasgermany/Anas/refs/heads/master/RCtoyyyyyyyyyyyyyyyyy.json',
       'color': 0xFFFF9800, // Orange for toys
     },
+    {
+      'name': 'Plus Size Pants',
+      'icon': null, // Icons.accessibility
+      'imageUrl':
+          'https://images.unsplash.com/photo-1445205170230-053b83016050?w=400&h=300&fit=crop',
+      'jsonUrl':
+          'https://raw.githubusercontent.com/anasgermany/Anas/refs/heads/master/plussizepants.json',
+      'color': 0xFFFF9800, // Orange for plus size
+    },
+    {
+      'name': 'Phone Cases Premium',
+      'icon': null, // Icons.phone_android
+      'imageUrl':
+          'https://images.unsplash.com/photo-1603313011108-4f2d0c0c5c1c?w=400&h=300&fit=crop',
+      'jsonUrl':
+          'https://raw.githubusercontent.com/anasgermany/Anas/refs/heads/master/phoneokalot.json',
+      'color': 0xFF9C27B0, // Purple for premium tech
+    },
+    {
+      'name': 'Phone Cases Standard',
+      'icon': null, // Icons.phone_android
+      'imageUrl':
+          'https://images.unsplash.com/photo-1603313011108-4f2d0c0c5c1c?w=400&h=300&fit=crop',
+      'jsonUrl':
+          'https://raw.githubusercontent.com/anasgermany/Anas/refs/heads/master/phoneok.json',
+      'color': 0xFF673AB7, // Deep purple for standard tech
+    },
+    {
+      'name': 'High Heels',
+      'icon': null, // Icons.sports_soccer
+      'imageUrl':
+          'https://images.unsplash.com/photo-1549298916-b41d501d3772?w=400&h=300&fit=crop',
+      'jsonUrl':
+          'https://raw.githubusercontent.com/anasgermany/Anas/refs/heads/master/heels.json',
+      'color': 0xFFE91E63, // Pink for heels
+    },
+    {
+      'name': 'Flat Shoes',
+      'icon': null, // Icons.sports_soccer
+      'imageUrl':
+          'https://images.unsplash.com/photo-1549298916-b41d501d3772?w=400&h=300&fit=crop',
+      'jsonUrl':
+          'https://raw.githubusercontent.com/anasgermany/Anas/refs/heads/master/flat.json',
+      'color': 0xFF8BC34A, // Light green for flats
+    },
   ];
 
   // ========================================
