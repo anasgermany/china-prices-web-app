@@ -70,8 +70,9 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
         title: Text(
           AppConstants.appName,
           style: GoogleFonts.poppins(
-            fontSize: 24,
-            fontWeight: FontWeight.bold,
+            fontSize: 28,
+            fontWeight: FontWeight.w900,
+            letterSpacing: 1.2,
           ),
         ),
         backgroundColor: AppConstants.primaryColor,
@@ -109,16 +110,16 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
             child: TextField(
               controller: _searchController,
               style: GoogleFonts.poppins(
-                fontSize: 16,
-                fontWeight: FontWeight.w500,
+                fontSize: 18,
+                fontWeight: FontWeight.w600,
                 color: Colors.grey[800],
               ),
               decoration: InputDecoration(
                 hintText: '🔍 Search for products, categories, brands...',
                 hintStyle: GoogleFonts.poppins(
-                  fontSize: 14,
+                  fontSize: 16,
                   color: Colors.grey[500],
-                  fontWeight: FontWeight.w400,
+                  fontWeight: FontWeight.w500,
                 ),
                 prefixIcon: Container(
                   margin: EdgeInsets.all(8),
@@ -181,7 +182,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
               onChanged: _onSearchChanged,
             ),
           ),
-          
+
           // Search Help Text
           Container(
             margin: EdgeInsets.only(bottom: 16),
@@ -198,8 +199,9 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                   child: Text(
                     '💡 Tip: Search for "drones", "dresses", "phones", "shoes" or any product you want!',
                     style: GoogleFonts.poppins(
-                      fontSize: 12,
+                      fontSize: 14,
                       color: Colors.grey[600],
+                      fontWeight: FontWeight.w500,
                       fontStyle: FontStyle.italic,
                     ),
                   ),
@@ -220,8 +222,8 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                   Text(
                     'Search results for "${_searchController.text}"',
                     style: GoogleFonts.poppins(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w500,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
                       color: Colors.grey[700],
                     ),
                   ),
@@ -231,7 +233,8 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                       return Text(
                         '${provider.searchResults.length} products found',
                         style: GoogleFonts.poppins(
-                          fontSize: 12,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500,
                           color: Colors.grey[600],
                         ),
                       );
@@ -264,7 +267,8 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                         Text(
                           'Loading products...',
                           style: GoogleFonts.poppins(
-                            fontSize: 16,
+                            fontSize: 18,
+                            fontWeight: FontWeight.w600,
                             color: Colors.grey[600],
                           ),
                         ),
@@ -331,17 +335,18 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                         Text(
                           'No products found',
                           style: GoogleFonts.poppins(
-                            fontSize: 18,
-                            fontWeight: FontWeight.w600,
-                            color: Colors.grey[600],
+                            fontSize: 20,
+                            fontWeight: FontWeight.w700,
+                            color: Colors.grey[700],
                           ),
                         ),
                         SizedBox(height: 8),
                         Text(
                           'Try adjusting your search terms or browse all categories',
                           style: GoogleFonts.poppins(
-                            fontSize: 14,
-                            color: Colors.grey[500],
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.grey[600],
                           ),
                           textAlign: TextAlign.center,
                         ),
@@ -414,8 +419,8 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
               label: Text(
                 category,
                 style: GoogleFonts.poppins(
-                  fontSize: 14,
-                  fontWeight: isSelected ? FontWeight.w600 : FontWeight.w400,
+                  fontSize: 16,
+                  fontWeight: isSelected ? FontWeight.w700 : FontWeight.w500,
                   color:
                       isSelected ? Colors.white : AppConstants.textPrimaryColor,
                 ),
@@ -578,17 +583,17 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                       Text(
                         'GET IT ON',
                         style: GoogleFonts.poppins(
-                          fontSize: 9,
-                          fontWeight: FontWeight.w500,
-                          color: Colors.white.withOpacity(0.8),
-                          letterSpacing: 1.0,
+                          fontSize: 12,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.white.withOpacity(0.9),
+                          letterSpacing: 1.2,
                         ),
                       ),
                       Text(
                         'Google Play',
                         style: GoogleFonts.poppins(
-                          fontSize: 14,
-                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w700,
                           color: Colors.white,
                         ),
                       ),
