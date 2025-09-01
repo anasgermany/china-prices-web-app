@@ -896,8 +896,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
             ),
             child: Row(
               children: [
-                _buildTab('Customer Reviews', true),
-                _buildTab('Specifications', false),
+                _buildTab('Specifications', true),
                 _buildTab('Description', false),
                 _buildTab('Store', false),
                 _buildTab('More to love', false),
@@ -912,7 +911,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Reviews',
+                  'Product Specifications',
                   style: GoogleFonts.poppins(
                     fontSize: 18,
                     fontWeight: FontWeight.w600,
@@ -921,7 +920,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
                 ),
                 SizedBox(height: 16),
                 Text(
-                  'No reviews yet. Be the first to review this product!',
+                  'Product details and specifications will be displayed here.',
                   style: GoogleFonts.poppins(
                     fontSize: 14,
                     color: Colors.grey.shade600,

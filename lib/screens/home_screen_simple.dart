@@ -28,7 +28,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
     _scrollController.addListener(_onScroll);
-    
+
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final provider = Provider.of<AppProvider>(context, listen: false);
       provider.initialize();
@@ -56,7 +56,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
   void _onScroll() {
     final currentPosition = _scrollController.position.pixels;
     final isScrollingUp = currentPosition < _lastScrollPosition;
-    
+
     // Only hide/show if there's a significant scroll change
     if ((currentPosition - _lastScrollPosition).abs() > 10) {
       if (isScrollingUp && !_isSearchBarVisible) {
@@ -64,14 +64,16 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
         setState(() {
           _isSearchBarVisible = true;
         });
-      } else if (!isScrollingUp && _isSearchBarVisible && currentPosition > 100) {
+      } else if (!isScrollingUp &&
+          _isSearchBarVisible &&
+          currentPosition > 100) {
         // Hide search bar when scrolling down (but only after scrolling past 100px)
         setState(() {
           _isSearchBarVisible = false;
         });
       }
     }
-    
+
     _lastScrollPosition = currentPosition;
   }
 
@@ -216,8 +218,6 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                   ),
                 ),
               ),
-
-
 
               // Search Results Header
               if (_searchController.text.isNotEmpty) ...[
@@ -408,7 +408,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
               ),
             ],
           ),
-          
+
           // Floating Action Button to show/hide search bar
           if (!_isSearchBarVisible)
             Positioned(
