@@ -24,7 +24,7 @@ class _FavoritesScreenState extends State<FavoritesScreen>
     super.initState();
     WidgetsBinding.instance.addObserver(this);
     _loadFavorites();
-    
+
     // Track page view for analytics
     WidgetsBinding.instance.addPostFrameCallback((_) {
       AnalyticsService.trackPageView(

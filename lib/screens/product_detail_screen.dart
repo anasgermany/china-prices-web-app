@@ -39,7 +39,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
-    
+
     // Track page view for analytics
     WidgetsBinding.instance.addPostFrameCallback((_) {
       AnalyticsService.trackPageView(
@@ -970,7 +970,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
           affiliateUrl: url,
           category: 'product_purchase',
         );
-        
+
         final success = await WebUrlService.openUrlInNewTab(url);
 
         if (success) {
@@ -1025,7 +1025,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
           textColor: Colors.white,
           onPressed: () async {
             await provider.removeFromFavorites(widget.product.productId);
-            
+
             // Track undo action for analytics
             AnalyticsService.trackFavorites(
               action: 'remove',

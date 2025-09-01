@@ -14,35 +14,38 @@ class AppConstants {
   static const double mobileBreakpoint = 600.0;
   static const double tabletBreakpoint = 900.0;
   static const double desktopBreakpoint = 1200.0;
-  
+
   // ========================================
   // WEB-SPECIFIC CONSTANTS
   // ========================================
-  static const String webAppTitle = 'China Prices - Compare Prices Across Chinese E-commerce';
-  static const String webAppDescription = 'Your ultimate shopping companion for the best deals from Chinese e-commerce platforms';
-  static const String webAppKeywords = 'china prices, shopping, e-commerce, price comparison, aliexpress, taobao, jd';
-  
+  static const String webAppTitle =
+      'China Prices - Compare Prices Across Chinese E-commerce';
+  static const String webAppDescription =
+      'Your ultimate shopping companion for the best deals from Chinese e-commerce platforms';
+  static const String webAppKeywords =
+      'china prices, shopping, e-commerce, price comparison, aliexpress, taobao, jd';
+
   // ========================================
   // COLORS - PRIMARY PALETTE
   // ========================================
   static const Color primaryColor = Color(0xFFFF6B35);
   static const Color secondaryColor = Color(0xFF4ECDC4);
   static const Color accentColor = Color(0xFFFFB347);
-  
+
   // ========================================
   // COLORS - BACKGROUND & SURFACE
   // ========================================
   static const Color backgroundColor = Color(0xFFF8F9FA);
   static const Color surfaceColor = Colors.white;
   static const Color cardColor = Colors.white;
-  
+
   // ========================================
   // COLORS - TEXT
   // ========================================
   static const Color textPrimaryColor = Color(0xFF2C3E50);
   static const Color textSecondaryColor = Color(0xFF7F8C8D);
   static const Color textLightColor = Color(0xFFBDC3C7);
-  
+
   // ========================================
   // COLORS - STATUS & FEEDBACK
   // ========================================
@@ -50,7 +53,7 @@ class AppConstants {
   static const Color errorColor = Color(0xFFE74C3C);
   static const Color warningColor = Color(0xFFF39C12);
   static const Color infoColor = Color(0xFF3498DB);
-  
+
   // ========================================
   // COLORS - GRADIENTS
   // ========================================
@@ -59,7 +62,7 @@ class AppConstants {
     end: Alignment.bottomRight,
     colors: [primaryColor, secondaryColor],
   );
-  
+
   static const LinearGradient backgroundGradient = LinearGradient(
     begin: Alignment.topCenter,
     end: Alignment.bottomCenter,
@@ -70,13 +73,15 @@ class AppConstants {
   // WEB ADVERTISING (Replace with your web ad IDs)
   // ========================================
   static const String googleAdSenseId = 'ca-pub-XXXXXXXXXXXXXXXX';
-  
+
   // ========================================
   // GOOGLE ANALYTICS (Replace with your Measurement ID)
   // ========================================
-  static const String googleAnalyticsId = 'G-VXF219J1RY'; // ✅ Tu Measurement ID de Google Analytics
-  static const bool enableGoogleAnalytics = true; // ✅ Activar/desactivar Analytics
-  
+  static const String googleAnalyticsId =
+      'G-VXF219J1RY'; // ✅ Tu Measurement ID de Google Analytics
+  static const bool enableGoogleAnalytics =
+      true; // ✅ Activar/desactivar Analytics
+
   // ========================================
   // STORE URLs & AFFILIATE LINKS
   // ========================================
@@ -93,7 +98,7 @@ class AppConstants {
   // ========================================
   // EDITABLE CATEGORIES - FULLY CUSTOMIZABLE
   // ========================================
-  // 
+  //
   // HOW TO EDIT CATEGORIES:
   // =======================
   // 1. Change the 'name' to whatever you want (e.g., 'Electronics' -> 'Wigs' or 'Cars')
@@ -112,60 +117,121 @@ class AppConstants {
   // Find icons at: https://fonts.google.com/icons
   static const List<Map<String, dynamic>> editableCategories = [
     {
-      'name': '', // Change this to 'Wigs' or 'Cars' or anything you want
-      'icon': null, // Icons.devices - Set to null to show only image
-      'imageUrl': 'https://i.pinimg.com/736x/f2/e3/9c/f2e39cb60ea8f6eadc90aa5fc913fc58.jpg', // Set to null to show only icon
-      'jsonUrl': 'https://raw.githubusercontent.com/anasgermany/Anas/refs/heads/master/RC.json',
-      // 'color': 0xFFE91E63, // Uncomment to add custom color
+      'name': 'Drones & RC',
+      'icon': null, // Icons.flight
+      'imageUrl':
+          'https://images.unsplash.com/photo-1579829366248-204fe8413f31?w=400&h=300&fit=crop',
+      'jsonUrl':
+          'https://raw.githubusercontent.com/anasgermany/Anas/refs/heads/master/Drone.json',
+      'color': 0xFF2196F3, // Blue color for drones
     },
     {
-      'name': '', // Change this to 'Wigs' or 'Cars' or anything you want
-      'icon': null, // Set to null to show only image (no icon)
-      'imageUrl': 'https://images.unsplash.com/photo-1445205170230-053b83016050?w=400&h=300&fit=crop',
-      'jsonUrl': 'https://raw.githubusercontent.com/anasgermany/Anas/refs/heads/master/WomenClothesShuffle.json',
+      'name': 'Evening Dresses',
+      'icon': null, // Icons.dress
+      'imageUrl':
+          'https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=400&h=300&fit=crop',
+      'jsonUrl':
+          'https://raw.githubusercontent.com/anasgermany/Anas/refs/heads/master/EveningDress.json',
+      'color': 0xFFE91E63, // Pink color for dresses
     },
     {
-      'name': 'Home & Garden', // Change this to 'Wigs' or 'Cars' or anything you want
-      'icon': null, // Icons.home
-      'imageUrl': null, // Set to null to show only icon (no image)
-      'jsonUrl': 'https://raw.githubusercontent.com/anasgermany/Anas/refs/heads/master/WomenClothesShuffle.json',
+      'name': 'Phone Cases',
+      'icon': null, // Icons.phone_android
+      'imageUrl':
+          'https://images.unsplash.com/photo-1603313011108-4f2d0c0c5c1c?w=400&h=300&fit=crop',
+      'jsonUrl':
+          'https://raw.githubusercontent.com/anasgermany/Anas/refs/heads/master/phonecases2.json',
+      'color': 0xFF9C27B0, // Purple color for tech
     },
     {
-      'name': 'Sports', // Change this to 'Wigs' or 'Cars' or anything you want
+      'name': 'Men Jeans',
+      'icon': null, // Icons.man
+      'imageUrl':
+          'https://images.unsplash.com/photo-1542272604-787c3835535d?w=400&h=300&fit=crop',
+      'jsonUrl':
+          'https://raw.githubusercontent.com/anasgermany/Anas/refs/heads/master/menjeans200.json',
+      'color': 0xFF795548, // Brown color for jeans
+    },
+    {
+      'name': 'Plus Size Clothes',
+      'icon': null, // Icons.accessibility
+      'imageUrl':
+          'https://images.unsplash.com/photo-1445205170230-053b83016050?w=400&h=300&fit=crop',
+      'jsonUrl':
+          'https://raw.githubusercontent.com/anasgermany/Anas/refs/heads/master/plussizeclothes1.json',
+      'color': 0xFFFF9800, // Orange color for fashion
+    },
+    {
+      'name': 'Smartphones',
+      'icon': null, // Icons.phone_iphone
+      'imageUrl':
+          'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=400&h=300&fit=crop',
+      'jsonUrl':
+          'https://raw.githubusercontent.com/anasgermany/Anas/refs/heads/master/smartphone1.json',
+      'color': 0xFF607D8B, // Blue-grey color for phones
+    },
+    {
+      'name': 'Plus Size Dresses',
+      'icon': null, // Icons.dress
+      'imageUrl':
+          'https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=400&h=300&fit=crop',
+      'jsonUrl':
+          'https://raw.githubusercontent.com/anasgermany/Anas/refs/heads/master/womenplussizedresses.json',
+      'color': 0xFFE91E63, // Pink color for dresses
+    },
+    {
+      'name': 'Kids Toys',
+      'icon': null, // Icons.toys
+      'imageUrl':
+          'https://images.unsplash.com/photo-1566576912321-d58ddd7a6088?w=400&h=300&fit=crop',
+      'jsonUrl':
+          'https://raw.githubusercontent.com/anasgermany/Anas/refs/heads/master/Kidstoysshufles2.json',
+      'color': 0xFFFF5722, // Deep orange for kids
+    },
+    {
+      'name': 'Wedding Dresses',
+      'icon': null, // Icons.favorite
+      'imageUrl':
+          'https://images.unsplash.com/photo-1519741497674-611481863552?w=400&h=300&fit=crop',
+      'jsonUrl':
+          'https://raw.githubusercontent.com/anasgermany/Anas/refs/heads/master/WeddingDresses.json',
+      'color': 0xFFF8BBD9, // Light pink for wedding
+    },
+    {
+      'name': 'Women Shoes',
       'icon': null, // Icons.sports_soccer
-      'imageUrl': 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop',
-      'jsonUrl': 'https://raw.githubusercontent.com/anasgermany/Anas/refs/heads/master/WomenClothesShuffle.json',
-      'color': 0xFF4CAF50, // Custom green color
+      'imageUrl':
+          'https://images.unsplash.com/photo-1549298916-b41d501d3772?w=400&h=300&fit=crop',
+      'jsonUrl':
+          'https://raw.githubusercontent.com/anasgermany/Anas/refs/heads/master/WomensShoes2.json',
+      'color': 0xFF8BC34A, // Light green for shoes
+    },
+    {
+      'name': 'Fashion Collection',
+      'icon': null, // Icons.style
+      'imageUrl':
+          'https://i.pinimg.com/736x/f2/e3/9c/f2e39cb60ea8f6eadc90aa5fc913fc58.jpg',
+      'jsonUrl':
+          'https://raw.githubusercontent.com/anasgermany/Anas/refs/heads/master/RC.json',
+      'color': 0xFF9C27B0, // Purple for fashion
+    },
+    {
+      'name': 'Women Clothes',
+      'icon': null, // Icons.woman
+      'imageUrl':
+          'https://images.unsplash.com/photo-1445205170230-053b83016050?w=400&h=300&fit=crop',
+      'jsonUrl':
+          'https://raw.githubusercontent.com/anasgermany/Anas/refs/heads/master/WomenClothesShuffle.json',
+      'color': 0xFFE91E63, // Pink for women's fashion
     },
     {
       'name': 'Toys & Games',
       'icon': null, // Icons.toys
-      'imageUrl': 'https://images.unsplash.com/photo-1566576912321-d58ddd7a6088?w=400&h=300&fit=crop',
-      'jsonUrl': 'https://raw.githubusercontent.com/anasgermany/Anas/refs/heads/master/RCtoyyyyyyyyyyyyyyyyy.json',
-    },
-    {
-      'name': 'Beauty',
-      'icon': null, // Icons.face
-      'imageUrl': 'https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=400&h=300&fit=crop',
-      'jsonUrl': 'https://raw.githubusercontent.com/anasgermany/Anas/refs/heads/master/WomenClothesShuffle.json',
-    },
-    {
-      'name': 'Automotive',
-      'icon': null, // Icons.directions_car
-      'imageUrl': 'https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=400&h=300&fit=crop',
-      'jsonUrl': 'https://raw.githubusercontent.com/anasgermany/Anas/refs/heads/master/WomenClothesShuffle.json',
-    },
-    {
-      'name': 'Health',
-      'icon': null, // Icons.health_and_safety
-      'imageUrl': 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=400&h=300&fit=crop',
-      'jsonUrl': 'https://raw.githubusercontent.com/anasgermany/Anas/refs/heads/master/WomenClothesShuffle.json',
-    },
-    {
-      'name': 'Books',
-      'icon': null, // Icons.book
-      'imageUrl': 'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=400&h=300&fit=crop',
-      'jsonUrl': 'https://raw.githubusercontent.com/anasgermany/Anas/refs/heads/master/WomenClothesShuffle.json',
+      'imageUrl':
+          'https://images.unsplash.com/photo-1566576912321-d58ddd7a6088?w=400&h=300&fit=crop',
+      'jsonUrl':
+          'https://raw.githubusercontent.com/anasgermany/Anas/refs/heads/master/RCtoyyyyyyyyyyyyyyyyy.json',
+      'color': 0xFFFF9800, // Orange for toys
     },
   ];
 
@@ -173,58 +239,98 @@ class AppConstants {
   // CATEGORY JSON LINKS - GITHUB (LEGACY - DEPRECATED)
   // ========================================
   static const Map<String, String> categoryJsonLinks = {
-    'jeans': 'https://raw.githubusercontent.com/anasgermany/Anas/refs/heads/master/RC.json',
-    'joss': 'https://raw.githubusercontent.com/anasgermany/Anas/refs/heads/master/WomenClothesShuffle.json',
-    'Home & Garden': 'https://raw.githubusercontent.com/anasgermany/Anas/refs/heads/master/WomenClothesShuffle.json',
-    'Sports': 'https://raw.githubusercontent.com/anasgermany/Anas/refs/heads/master/WomenClothesShuffle.json',
-    'Toys & Games': 'https://raw.githubusercontent.com/anasgermany/Anas/refs/heads/master/RCtoyyyyyyyyyyyyyyyyy.json',
-    'Beauty': 'https://raw.githubusercontent.com/anasgermany/Anas/refs/heads/master/WomenClothesShuffle.json',
-    'Automotive': 'https://raw.githubusercontent.com/anasgermany/Anas/refs/heads/master/WomenClothesShuffle.json',
-    'Health': 'https://raw.githubusercontent.com/anasgermany/Anas/refs/heads/master/WomenClothesShuffle.json',
-    'Books': 'https://raw.githubusercontent.com/anasgermany/Anas/refs/heads/master/WomenClothesShuffle.json',
+    'Drones & RC':
+        'https://raw.githubusercontent.com/anasgermany/Anas/refs/heads/master/Drone.json',
+    'Evening Dresses':
+        'https://raw.githubusercontent.com/anasgermany/Anas/refs/heads/master/EveningDress.json',
+    'Phone Cases':
+        'https://raw.githubusercontent.com/anasgermany/Anas/refs/heads/master/phonecases2.json',
+    'Men Jeans':
+        'https://raw.githubusercontent.com/anasgermany/Anas/refs/heads/master/menjeans200.json',
+    'Plus Size Clothes':
+        'https://raw.githubusercontent.com/anasgermany/Anas/refs/heads/master/plussizeclothes1.json',
+    'Smartphones':
+        'https://raw.githubusercontent.com/anasgermany/Anas/refs/heads/master/smartphone1.json',
+    'Plus Size Dresses':
+        'https://raw.githubusercontent.com/anasgermany/Anas/refs/heads/master/womenplussizedresses.json',
+    'Kids Toys':
+        'https://raw.githubusercontent.com/anasgermany/Anas/refs/heads/master/Kidstoysshufles2.json',
+    'Wedding Dresses':
+        'https://raw.githubusercontent.com/anasgermany/Anas/refs/heads/master/WeddingDresses.json',
+    'Women Shoes':
+        'https://raw.githubusercontent.com/anasgermany/Anas/refs/heads/master/WomensShoes2.json',
+    'Fashion Collection':
+        'https://raw.githubusercontent.com/anasgermany/Anas/refs/heads/master/RC.json',
+    'Women Clothes':
+        'https://raw.githubusercontent.com/anasgermany/Anas/refs/heads/master/WomenClothesShuffle.json',
+    'Toys & Games':
+        'https://raw.githubusercontent.com/anasgermany/Anas/refs/heads/master/RCtoyyyyyyyyyyyyyyyyy.json',
   };
 
   // ========================================
   // FASHION JSON LINK - GITHUB
   // ========================================
-  static const String fashionJsonUrl = 'https://raw.githubusercontent.com/anasgermany/Anas/refs/heads/master/high_quality_images.json';
+  static const String fashionJsonUrl =
+      'https://raw.githubusercontent.com/anasgermany/Anas/refs/heads/master/high_quality_images.json';
 
   // ========================================
   // APP STORE LINKS - ANDROID ONLY
   // ========================================
-  static const String googlePlayStoreUrl = 'https://play.google.com/store/apps/details?id=com.chinashopping.onlinechinashopping.chinaonlineshopping.china.online.shopping.chinashoppingonline';
-  
+  static const String googlePlayStoreUrl =
+      'https://play.google.com/store/apps/details?id=com.chinashopping.onlinechinashopping.chinaonlineshopping.china.online.shopping.chinashoppingonline';
+
   // App promotion text for sharing - Android only
-  static const String appPromotionText = 'Check out this amazing fashion item! Discover more styles in China Shopping Online app - your ultimate shopping companion for the best deals from Chinese e-commerce platforms! 📱✨\n\nDownload now:\nAndroid: $googlePlayStoreUrl';
+  static const String appPromotionText =
+      'Check out this amazing fashion item! Discover more styles in China Shopping Online app - your ultimate shopping companion for the best deals from Chinese e-commerce platforms! 📱✨\n\nDownload now:\nAndroid: $googlePlayStoreUrl';
 
   // ========================================
   // CATEGORY IMAGES URLs (LEGACY - DEPRECATED)
   // ========================================
   static const Map<String, String> categoryImages = {
-    'jean': 'https://i.pinimg.com/736x/f2/e3/9c/f2e39cb60ea8f6eadc90aa5fc913fc58.jpg',
-    'joss': 'https://i.pinimg.com/736x/f2/e3/9c/f2e39cb60ea8f6eadc90aa5fc913fc58.jpg',
-    'Home & Garden': 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400&h=300&fit=crop',
-    'Sports': 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop',
-    'Toys & Games': 'https://images.unsplash.com/photo-1566576912321-d58ddd7a6088?w=400&h=300&fit=crop',
-    'Beauty': 'https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=400&h=300&fit=crop',
-    'Automotive': 'https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=400&h=300&fit=crop',
-    'Health': 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=400&h=300&fit=crop',
-    'Books': 'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=400&h=300&fit=crop',
+    'Drones & RC':
+        'https://images.unsplash.com/photo-1579829366248-204fe8413f31?w=400&h=300&fit=crop',
+    'Evening Dresses':
+        'https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=400&h=300&fit=crop',
+    'Phone Cases':
+        'https://images.unsplash.com/photo-1603313011108-4f2d0c0c5c1c?w=400&h=300&fit=crop',
+    'Men Jeans':
+        'https://images.unsplash.com/photo-1542272604-787c3835535d?w=400&h=300&fit=crop',
+    'Plus Size Clothes':
+        'https://images.unsplash.com/photo-1445205170230-053b83016050?w=400&h=300&fit=crop',
+    'Smartphones':
+        'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=400&h=300&fit=crop',
+    'Plus Size Dresses':
+        'https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=400&h=300&fit=crop',
+    'Kids Toys':
+        'https://images.unsplash.com/photo-1566576912321-d58ddd7a6088?w=400&h=300&fit=crop',
+    'Wedding Dresses':
+        'https://images.unsplash.com/photo-1519741497674-611481863552?w=400&h=300&fit=crop',
+    'Women Shoes':
+        'https://images.unsplash.com/photo-1549298916-b41d501d3772?w=400&h=300&fit=crop',
+    'Fashion Collection':
+        'https://i.pinimg.com/736x/f2/e3/9c/f2e39cb60ea8f6eadc90aa5fc913fc58.jpg',
+    'Women Clothes':
+        'https://images.unsplash.com/photo-1445205170230-053b83016050?w=400&h=300&fit=crop',
+    'Toys & Games':
+        'https://images.unsplash.com/photo-1566576912321-d58ddd7a6088?w=400&h=300&fit=crop',
   };
 
   // ========================================
   // HELPER METHODS FOR CATEGORIES
   // ========================================
-  
+
   /// Get all editable categories as CategoryModel objects
   static List<CategoryModel> getEditableCategories() {
     return editableCategories.map((categoryData) {
       return CategoryModel(
         name: categoryData['name'] ?? '',
-        icon: categoryData['icon'] != null ? IconData(categoryData['icon'], fontFamily: 'MaterialIcons') : null,
+        icon: categoryData['icon'] != null
+            ? IconData(categoryData['icon'], fontFamily: 'MaterialIcons')
+            : null,
         imageUrl: categoryData['imageUrl'],
         jsonUrl: categoryData['jsonUrl'] ?? '',
-        color: categoryData['color'] != null ? Color(categoryData['color']) : null,
+        color:
+            categoryData['color'] != null ? Color(categoryData['color']) : null,
       );
     }).toList();
   }
@@ -259,12 +365,12 @@ class AppConstants {
   static const double borderRadius = 12.0;
   static const double smallBorderRadius = 8.0;
   static const double largeBorderRadius = 16.0;
-  
+
   static const double defaultPadding = 16.0;
   static const double smallPadding = 8.0;
   static const double largePadding = 24.0;
   static const double extraLargePadding = 32.0;
-  
+
   static const double defaultMargin = 16.0;
   static const double smallMargin = 8.0;
   static const double largeMargin = 24.0;
@@ -275,11 +381,11 @@ class AppConstants {
   static const double iconSize = 24.0;
   static const double smallIconSize = 16.0;
   static const double largeIconSize = 32.0;
-  
+
   static const double buttonHeight = 56.0;
   static const double smallButtonHeight = 40.0;
   static const double largeButtonHeight = 64.0;
-  
+
   static const double cardElevation = 4.0;
   static const double smallCardElevation = 2.0;
   static const double largeCardElevation = 8.0;
@@ -301,7 +407,7 @@ class AppConstants {
   static const Duration normalAnimation = Duration(milliseconds: 300);
   static const Duration slowAnimation = Duration(milliseconds: 500);
   static const Duration verySlowAnimation = Duration(milliseconds: 800);
-  
+
   // Legacy animation names for backward compatibility
   static const Duration shortAnimation = fastAnimation;
   static const Duration mediumAnimation = normalAnimation;
@@ -333,12 +439,14 @@ class AppConstants {
   // ========================================
   // APP DESCRIPTION
   // ========================================
-  static const String appDescription = 'Compare prices across Chinese e-commerce platforms';
+  static const String appDescription =
+      'Compare prices across Chinese e-commerce platforms';
 
   // ========================================
   // SPLASH SCREEN CONFIGURATION
   // ========================================
-  static const String splashBackgroundImageUrl = 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80';
+  static const String splashBackgroundImageUrl =
+      'https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80';
 
   // ========================================
   // AD CONFIGURATION
@@ -348,13 +456,16 @@ class AppConstants {
   static const int interstitialAdFrequency = 5;
   static const bool enableTestAds = true;
   static const bool enableProductionAds = false;
-  
+
   // Interstitial Ad IDs
-  static const String splashScreenInterstitialId = 'ca-app-pub-3940256099942544/1033173712'; // Test ad ID
-  static const String appInterstitialId = 'ca-app-pub-3940256099942544/1033173712'; // Test ad ID for app clicks
-  
+  static const String splashScreenInterstitialId =
+      'ca-app-pub-3940256099942544/1033173712'; // Test ad ID
+  static const String appInterstitialId =
+      'ca-app-pub-3940256099942544/1033173712'; // Test ad ID for app clicks
+
   // Interstitial Ad Configuration
-  static const int clicksBeforeInterstitial = 5; // Show interstitial after 5 clicks
+  static const int clicksBeforeInterstitial =
+      5; // Show interstitial after 5 clicks
 
   // ========================================
   // NETWORK & API CONSTANTS
@@ -365,9 +476,12 @@ class AppConstants {
   // ========================================
   // ERROR MESSAGES
   // ========================================
-  static const String networkErrorMessage = 'Network error. Please check your connection.';
-  static const String generalErrorMessage = 'Something went wrong. Please try again.';
-  static const String noResultsMessage = 'No products found. Try a different search.';
+  static const String networkErrorMessage =
+      'Network error. Please check your connection.';
+  static const String generalErrorMessage =
+      'Something went wrong. Please try again.';
+  static const String noResultsMessage =
+      'No products found. Try a different search.';
   static const String loadingMessage = 'Loading...';
   static const String errorLoadingProducts = 'Error loading products';
   static const String errorUpdatingFavorites = 'Error updating favorites';
@@ -394,21 +508,26 @@ class AppConstants {
   // ========================================
   static const String supportEmail = 'support@chinaprices.com';
   static const String companyEmail = 'info@chinaprices.com';
-  static const String privacyPolicyUrl = 'https://chinaprices.com/privacy-policy';
-  static const String termsOfServiceUrl = 'https://chinaprices.com/terms-of-service';
-  static const String appStoreUrl = 'https://play.google.com/store/apps/details?id=com.chinashopping.onlinechinashopping.chinaonlineshopping.china.online.shopping.chinashoppingonline';
-  
+  static const String privacyPolicyUrl =
+      'https://chinaprices.com/privacy-policy';
+  static const String termsOfServiceUrl =
+      'https://chinaprices.com/terms-of-service';
+  static const String appStoreUrl =
+      'https://play.google.com/store/apps/details?id=com.chinashopping.onlinechinashopping.chinaonlineshopping.china.online.shopping.chinashoppingonline';
+
   // Email Configuration
   static const String emailSubjectPrefix = '[ChinaPrices]';
   static const String emailSubjectDefault = 'App Support Request';
-  static const String emailBodyTemplate = 'Hello,\n\nI would like to contact you regarding the China Prices app.\n\nApp Version: 1.0.0\nDevice: Android\n\nBest regards,\n[Your Name]';
-  
+  static const String emailBodyTemplate =
+      'Hello,\n\nI would like to contact you regarding the China Prices app.\n\nApp Version: 1.0.0\nDevice: Android\n\nBest regards,\n[Your Name]';
+
   // Automatic Notification Configuration
   static const int automaticNotificationIntervalSeconds = 0; // Seconds (0-59)
   static const int automaticNotificationIntervalMinutes = 0; // Minutes (0-59)
   static const int automaticNotificationIntervalHours = 1; // Hours (0-23)
-  static const bool enableAutomaticNotifications = true; // Set to false to disable automatic notifications
-  
+  static const bool enableAutomaticNotifications =
+      true; // Set to false to disable automatic notifications
+
   // Settings Colors
   static const Color settingsPrimaryColor = Color(0xFF3338A0);
   static const Color settingsSecondaryColor = Color(0xFF8B5CF6);
@@ -417,7 +536,7 @@ class AppConstants {
   static const Color settingsCardColor = Color(0xFFFFFFFF);
   static const Color settingsTextColor = Color(0xFF1E293B);
   static const Color settingsSubtextColor = Color(0xFF64748B);
-  
+
   // Settings Text
   static const String settingsTitle = 'Settings';
   static const String contactUsTitle = 'Contact Us';
@@ -429,5 +548,6 @@ class AppConstants {
   static const String rateAppSubtitle = 'Help us with 5 stars!';
   static const String appVersionText = 'App Version';
   static const String aboutAppText = 'About China Prices';
-  static const String aboutAppDescription = 'Your ultimate shopping companion for the best deals from Chinese e-commerce platforms';
+  static const String aboutAppDescription =
+      'Your ultimate shopping companion for the best deals from Chinese e-commerce platforms';
 }

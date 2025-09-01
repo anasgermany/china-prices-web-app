@@ -27,7 +27,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final provider = Provider.of<AppProvider>(context, listen: false);
       provider.initialize();
-      
+
       // Track page view for analytics
       AnalyticsService.trackPageView(
         pageName: 'home_screen',
@@ -381,7 +381,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
     } else {
       // Search with fresh data
       await provider.searchProducts(query);
-      
+
       // Track search for analytics
       AnalyticsService.trackSearch(
         searchTerm: query,
@@ -421,7 +421,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
       // For specific categories, load fresh products
       provider.loadProductsByCategory(category);
     }
-    
+
     // Track category selection for analytics
     AnalyticsService.trackEvent(
       eventName: 'category_selected',
@@ -441,7 +441,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
       category: _selectedCategory != 'All' ? _selectedCategory : null,
       price: product.numericPrice.toDouble(),
     );
-    
+
     Navigator.pushNamed(
       context,
       AppRoutes.productDetail,

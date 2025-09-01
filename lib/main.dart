@@ -14,8 +14,9 @@ void main() async {
   if (AnalyticsConfig.enabled && AnalyticsConfig.measurementId.isNotEmpty) {
     try {
       await AnalyticsService.initialize(AnalyticsConfig.measurementId);
-      print('✅ Google Analytics initialized with ID: ${AnalyticsConfig.measurementId}');
-      
+      print(
+          '✅ Google Analytics initialized with ID: ${AnalyticsConfig.measurementId}');
+
       if (AnalyticsConfig.debugMode) {
         print('🔍 Analytics Debug Config: ${AnalyticsConfig.debugConfig}');
       }
