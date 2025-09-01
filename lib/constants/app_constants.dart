@@ -162,6 +162,15 @@ class AppConstants {
       'color': 0xFFFF9800, // Orange color for fashion
     },
     {
+      'name': 'Electronics',
+      'icon': null, // Icons.devices
+      'imageUrl':
+          'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=400&h=300&fit=crop',
+      'jsonUrl':
+          'https://raw.githubusercontent.com/anasgermany/Anas/refs/heads/master/smartphone5.json',
+      'color': 0xFF607D8B, // Blue-grey color for electronics
+    },
+    {
       'name': 'Smartphones',
       'icon': null, // Icons.phone_iphone
       'imageUrl':
