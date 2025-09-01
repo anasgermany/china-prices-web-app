@@ -6,6 +6,7 @@ import '../services/app_provider_web.dart';
 import '../widgets/product_card_simple.dart';
 import '../models/product_model.dart';
 import '../routes.dart';
+import '../services/web_url_service.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -54,6 +55,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
     return Scaffold(
       backgroundColor: AppConstants.backgroundColor,
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: Text(
           AppConstants.appName,
           style: GoogleFonts.poppins(
@@ -150,16 +152,34 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
             ),
           ],
 
+          // Google Play Download Banner
+          _buildGooglePlayBanner(),
+
           // Categories
           _buildCategoriesSection(),
 
-          // Products
+          // Products Grid
           Expanded(
             child: Consumer<AppProvider>(
               builder: (context, provider, child) {
                 if (provider.isLoading) {
-                  return const Center(
-                    child: CircularProgressIndicator(),
+                  return Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        CircularProgressIndicator(
+                          color: AppConstants.primaryColor,
+                        ),
+                        SizedBox(height: 16),
+                        Text(
+                          'Loading products...',
+                          style: GoogleFonts.poppins(
+                            fontSize: 16,
+                            color: Colors.grey[600],
+                          ),
+                        ),
+                      ],
+                    ),
                   );
                 }
 
@@ -173,26 +193,41 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                           size: 64,
                           color: Colors.red[300],
                         ),
-                        const SizedBox(height: 16),
+                        SizedBox(height: 16),
                         Text(
-                          'Error: ${provider.errorMessage}',
+                          'Error loading products',
                           style: GoogleFonts.poppins(
-                            fontSize: 16,
+                            fontSize: 18,
+                            fontWeight: FontWeight.w600,
                             color: Colors.red[700],
+                          ),
+                        ),
+                        SizedBox(height: 8),
+                        Text(
+                          provider.errorMessage,
+                          style: GoogleFonts.poppins(
+                            fontSize: 14,
+                            color: Colors.grey[600],
                           ),
                           textAlign: TextAlign.center,
                         ),
-                        const SizedBox(height: 16),
+                        SizedBox(height: 16),
                         ElevatedButton(
-                          onPressed: () => provider.initialize(),
-                          child: const Text('Retry'),
+                          onPressed: () => provider.refreshProducts(),
+                          child: Text('Retry'),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: AppConstants.primaryColor,
+                            foregroundColor: Colors.white,
+                          ),
                         ),
                       ],
                     ),
                   );
                 }
 
-                if (provider.searchResults.isEmpty) {
+                final products = provider.searchResults;
+
+                if (products.isEmpty) {
                   return Center(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -202,22 +237,35 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                           size: 64,
                           color: Colors.grey[400],
                         ),
-                        const SizedBox(height: 16),
+                        SizedBox(height: 16),
                         Text(
                           'No products found',
                           style: GoogleFonts.poppins(
                             fontSize: 18,
+                            fontWeight: FontWeight.w600,
                             color: Colors.grey[600],
                           ),
                         ),
-                        const SizedBox(height: 8),
+                        SizedBox(height: 8),
                         Text(
-                          'Try adjusting your search or category filter',
+                          'Try adjusting your search terms or browse all categories',
                           style: GoogleFonts.poppins(
                             fontSize: 14,
                             color: Colors.grey[500],
                           ),
                           textAlign: TextAlign.center,
+                        ),
+                        SizedBox(height: 16),
+                        ElevatedButton(
+                          onPressed: () {
+                            _searchController.clear();
+                            provider.refreshProducts();
+                          },
+                          child: Text('Show All Products'),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: AppConstants.primaryColor,
+                            foregroundColor: Colors.white,
+                          ),
                         ),
                       ],
                     ),
@@ -232,9 +280,9 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                     crossAxisSpacing: 16,
                     mainAxisSpacing: 16,
                   ),
-                  itemCount: provider.searchResults.length,
+                  itemCount: products.length,
                   itemBuilder: (context, index) {
-                    final product = provider.searchResults[index];
+                    final product = products[index];
                     return ProductCardSimple(
                       product: product,
                       onTap: () => _onProductTap(product),
@@ -253,21 +301,16 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
   Widget _buildCategoriesSection() {
     final categories = [
       'All',
-      'Cellphone',
-      'Clothing',
-      'Toys',
+      'Fashion',
       'Electronics',
-      'Automotive',
-      'Sports',
-      'Home & Garden',
+      'Home',
       'Beauty',
-      'Books',
-      'Health',
+      'Sports'
     ];
 
     return Container(
       height: 60,
-      padding: const EdgeInsets.symmetric(horizontal: 16),
+      margin: const EdgeInsets.symmetric(horizontal: 16),
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         itemCount: categories.length,
@@ -297,6 +340,10 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
               backgroundColor: Colors.grey[200],
               selectedColor: AppConstants.primaryColor,
               checkmarkColor: Colors.white,
+              side: BorderSide.none,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20),
+              ),
             ),
           );
         },
@@ -359,7 +406,6 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
   }
 
   void _onProductTap(Product product) {
-    // Navigate to product detail
     Navigator.pushNamed(
       context,
       AppRoutes.productDetail,
@@ -375,5 +421,100 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
   void _refreshProducts() {
     final provider = Provider.of<AppProvider>(context, listen: false);
     provider.refreshProducts();
+  }
+
+  Widget _buildGooglePlayBanner() {
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          onTap: () => _launchGooglePlayStore(),
+          borderRadius: BorderRadius.circular(12),
+          child: Container(
+            padding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [Colors.green.shade600, Colors.green.shade700],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+              ),
+              borderRadius: BorderRadius.circular(12),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.green.withOpacity(0.3),
+                  blurRadius: 8,
+                  offset: Offset(0, 2),
+                ),
+              ],
+            ),
+            child: Row(
+              children: [
+                Icon(
+                  Icons.play_circle_filled,
+                  color: Colors.white,
+                  size: 24,
+                ),
+                SizedBox(width: 12),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'GET IT ON',
+                        style: GoogleFonts.poppins(
+                          fontSize: 9,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.white.withOpacity(0.8),
+                          letterSpacing: 1.0,
+                        ),
+                      ),
+                      Text(
+                        'Google Play',
+                        style: GoogleFonts.poppins(
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Icon(
+                  Icons.arrow_forward,
+                  color: Colors.white,
+                  size: 20,
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  void _launchGooglePlayStore() {
+    final googlePlayUrl =
+        'https://play.google.com/store/apps/details?id=com.marconlineshopping.humanhairwigs';
+
+    // For web, we'll use the WebUrlService to open in new tab
+    WebUrlService.openUrlInNewTab(googlePlayUrl).then((success) {
+      if (success) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Opening Google Play Store...'),
+            backgroundColor: Colors.green,
+            duration: Duration(seconds: 2),
+          ),
+        );
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Error opening Google Play Store'),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
+    });
   }
 }

@@ -24,18 +24,18 @@ A modern Flutter Web application for comparing prices across Chinese e-commerce 
 ### Installation
 
 1. **Clone the repository**
-   ```bash
+```bash
    git clone https://github.com/your-username/china-prices-web-app.git
    cd china-prices-web-app
-   ```
+```
 
 2. **Install dependencies**
-   ```bash
-   flutter pub get
-   ```
+```bash
+flutter pub get
+```
 
 3. **Run the app**
-   ```bash
+```bash
    flutter run -d chrome --web-port 8080
    ```
 

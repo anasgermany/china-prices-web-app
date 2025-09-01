@@ -18,13 +18,20 @@ class ProductDetailScreen extends StatefulWidget {
   State<ProductDetailScreen> createState() => _ProductDetailScreenState();
 }
 
-class _ProductDetailScreenState extends State<ProductDetailScreen> with WidgetsBindingObserver {
+class _ProductDetailScreenState extends State<ProductDetailScreen>
+    with WidgetsBindingObserver {
   String _selectedColor = 'Pink';
   String _selectedSize = 'S';
   int _quantity = 1;
-  int _selectedImageIndex = 0;
 
-  final List<String> _colors = ['Pink', 'White', 'Black', 'Green', 'Red', 'Orange'];
+  final List<String> _colors = [
+    'Pink',
+    'White',
+    'Black',
+    'Green',
+    'Red',
+    'Orange'
+  ];
   final List<String> _sizes = ['S', 'M', 'L', 'XL', 'XXL'];
 
   @override
@@ -42,9 +49,10 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with WidgetsB
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     super.didChangeAppLifecycleState(state);
-    
+
     if (state == AppLifecycleState.resumed) {
-      print('ProductDetailScreen: App resumed, products will be refreshed when returning home...');
+      print(
+          'ProductDetailScreen: App resumed, products will be refreshed when returning home...');
     }
   }
 
@@ -75,13 +83,16 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with WidgetsB
           children: [
             // Product Image Gallery
             _buildImageGallery(),
-            
+
             // Product Details
             _buildProductDetails(),
-            
+
             // Service Commitments
             _buildServiceCommitments(),
-            
+
+            // Recommended Products
+            _buildRecommendedProducts(),
+
             // Bottom Navigation Tabs
             _buildBottomTabs(),
           ],
@@ -92,91 +103,60 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with WidgetsB
 
   Widget _buildImageGallery() {
     return Container(
-      height: 500,
-      child: Row(
-        children: [
-          // Thumbnail Gallery
-          Container(
-            width: 80,
-            child: ListView.builder(
-              itemCount: _colors.length + 2, // +2 for close-up views
-              itemBuilder: (context, index) {
-                return Container(
-                  margin: EdgeInsets.only(bottom: 8),
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      color: _selectedImageIndex == index ? Colors.black : Colors.grey.shade300,
-                      width: _selectedImageIndex == index ? 2 : 1,
-                    ),
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(6),
-                    child: AspectRatio(
-                      aspectRatio: 1,
-                      child: Container(
-                        color: _getColorForIndex(index),
-                        child: index >= _colors.length 
-                          ? Icon(Icons.zoom_in, color: Colors.white)
-                          : null,
+      height: 400,
+      padding: EdgeInsets.symmetric(horizontal: 24),
+      child: Container(
+        width: double.infinity,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(16),
+          color: Colors.grey.shade100,
+        ),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(16),
+          child: widget.product.imageUrl.isNotEmpty
+              ? Image.network(
+                  widget.product.imageUrl,
+                  fit: BoxFit.cover,
+                  errorBuilder: (context, error, stackTrace) {
+                    return Container(
+                      color: Colors.grey[300],
+                      child: Icon(
+                        Icons.image_not_supported,
+                        size: 64,
+                        color: Colors.grey[600],
                       ),
-                    ),
+                    );
+                  },
+                )
+              : Container(
+                  color: Colors.grey[300],
+                  child: Icon(
+                    Icons.image_not_supported,
+                    size: 64,
+                    color: Colors.grey[600],
                   ),
-                );
-              },
-            ),
-          ),
-          
-          // Main Product Image
-          Expanded(
-            child: Container(
-              margin: EdgeInsets.only(left: 16),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(16),
-                color: Colors.grey.shade100,
-              ),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(16),
-                child: widget.product.imageUrl.isNotEmpty
-                    ? Image.network(
-                        widget.product.imageUrl,
-                        fit: BoxFit.cover,
-                        errorBuilder: (context, error, stackTrace) {
-                          return Container(
-                            color: _getColorForIndex(_selectedImageIndex),
-                            child: Icon(
-                              Icons.image_not_supported,
-                              size: 64,
-                              color: Colors.white,
-                            ),
-                          );
-                        },
-                      )
-                    : Container(
-                        color: _getColorForIndex(_selectedImageIndex),
-                        child: Icon(
-                          Icons.image_not_supported,
-                          size: 64,
-                          color: Colors.white,
-                        ),
-                      ),
-              ),
-            ),
-          ),
-        ],
+                ),
+        ),
       ),
     );
   }
 
-  Color _getColorForIndex(int index) {
-    switch (index) {
-      case 0: return Colors.pink;
-      case 1: return Colors.white;
-      case 2: return Colors.black;
-      case 3: return Colors.green;
-      case 4: return Colors.red;
-      case 5: return Colors.orange;
-      default: return Colors.grey;
+  Color _getColorByName(String colorName) {
+    switch (colorName.toLowerCase()) {
+      case 'pink':
+        return Colors.pink;
+      case 'white':
+        return Colors.white;
+      case 'black':
+        return Colors.black;
+      case 'green':
+        return Colors.green;
+      case 'red':
+        return Colors.red;
+      case 'orange':
+        return Colors.orange;
+      default:
+        return Colors.grey;
     }
   }
 
@@ -196,9 +176,9 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with WidgetsB
               height: 1.3,
             ),
           ),
-          
+
           SizedBox(height: 8),
-          
+
           // Sales Count
           Text(
             '9 sold',
@@ -207,9 +187,9 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with WidgetsB
               color: Colors.grey.shade600,
             ),
           ),
-          
+
           SizedBox(height: 16),
-          
+
           // Promotional Banner
           Container(
             padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -226,9 +206,9 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with WidgetsB
               ),
             ),
           ),
-          
+
           SizedBox(height: 24),
-          
+
           // Pricing Information
           Row(
             crossAxisAlignment: CrossAxisAlignment.end,
@@ -252,9 +232,9 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with WidgetsB
               ),
             ],
           ),
-          
+
           SizedBox(height: 4),
-          
+
           Text(
             '32,71€',
             style: GoogleFonts.poppins(
@@ -263,9 +243,9 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with WidgetsB
               decoration: TextDecoration.lineThrough,
             ),
           ),
-          
+
           SizedBox(height: 8),
-          
+
           Text(
             'Price includes VAT',
             style: GoogleFonts.poppins(
@@ -273,9 +253,9 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with WidgetsB
               color: Colors.grey.shade500,
             ),
           ),
-          
+
           SizedBox(height: 16),
-          
+
           // Additional Discount
           Container(
             padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
@@ -292,9 +272,9 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with WidgetsB
               ),
             ),
           ),
-          
+
           SizedBox(height: 24),
-          
+
           // Color Selection
           Text(
             'Color: $_selectedColor',
@@ -304,9 +284,9 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with WidgetsB
               color: Colors.black87,
             ),
           ),
-          
+
           SizedBox(height: 12),
-          
+
           Row(
             children: _colors.map((color) {
               final isSelected = _selectedColor == color;
@@ -326,16 +306,16 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with WidgetsB
                     child: Container(
                       width: 40,
                       height: 40,
-                      color: _getColorForIndex(_colors.indexOf(color)),
+                      color: _getColorByName(color),
                     ),
                   ),
                 ),
               );
             }).toList(),
           ),
-          
+
           SizedBox(height: 24),
-          
+
           // Size Selection
           Text(
             'Size: $_selectedSize',
@@ -345,9 +325,9 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with WidgetsB
               color: Colors.black87,
             ),
           ),
-          
+
           SizedBox(height: 12),
-          
+
           Row(
             children: _sizes.map((size) {
               final isSelected = _selectedSize == size;
@@ -376,9 +356,9 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with WidgetsB
               );
             }).toList(),
           ),
-          
+
           SizedBox(height: 24),
-          
+
           // Quantity Selector
           Text(
             'Quantity',
@@ -388,9 +368,9 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with WidgetsB
               color: Colors.black87,
             ),
           ),
-          
+
           SizedBox(height: 12),
-          
+
           Row(
             children: [
               Container(
@@ -438,15 +418,16 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with WidgetsB
               ),
             ],
           ),
-          
+
           SizedBox(height: 32),
-          
+
           // Action Buttons
           Row(
             children: [
               Expanded(
                 child: ElevatedButton(
-                  onPressed: () => _launchProductUrl(context, widget.product.promotionUrl),
+                  onPressed: () =>
+                      _launchProductUrl(context, widget.product.promotionUrl),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.red,
                     foregroundColor: Colors.white,
@@ -488,9 +469,9 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with WidgetsB
               ),
             ],
           ),
-          
+
           SizedBox(height: 16),
-          
+
           // Share and Wishlist
           Row(
             children: [
@@ -539,9 +520,14 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with WidgetsB
               ),
             ],
           ),
-          
+
           SizedBox(height: 24),
-          
+
+          // Google Play Download Button
+          _buildGooglePlayButton(),
+
+          SizedBox(height: 24),
+
           // Seller & Shipping
           Container(
             padding: EdgeInsets.all(16),
@@ -562,7 +548,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with WidgetsB
                         color: Colors.black87,
                       ),
                     ),
-                    Icon(Icons.arrow_forward_ios, size: 16, color: Colors.grey.shade600),
+                    Icon(Icons.arrow_forward_ios,
+                        size: 16, color: Colors.grey.shade600),
                   ],
                 ),
                 SizedBox(height: 12),
@@ -571,7 +558,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with WidgetsB
                   children: [
                     Row(
                       children: [
-                        Icon(Icons.location_on, size: 16, color: Colors.grey.shade600),
+                        Icon(Icons.location_on,
+                            size: 16, color: Colors.grey.shade600),
                         SizedBox(width: 8),
                         Text(
                           'Ship to Frankfurt am Main, Hesse...',
@@ -583,7 +571,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with WidgetsB
                         ),
                       ],
                     ),
-                    Icon(Icons.arrow_forward_ios, size: 16, color: Colors.grey.shade600),
+                    Icon(Icons.arrow_forward_ios,
+                        size: 16, color: Colors.grey.shade600),
                   ],
                 ),
               ],
@@ -609,7 +598,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with WidgetsB
           _buildServiceItem(
             icon: Icons.access_time,
             title: 'Fast delivery',
-            subtitle: '1,00€ coupon code if delayed, Refund if package lost, Refund if items damaged, Refund if no delivery in 40 days',
+            subtitle:
+                '1,00€ coupon code if delayed, Refund if package lost, Refund if items damaged, Refund if no delivery in 40 days',
             color: Colors.green,
           ),
           SizedBox(height: 16),
@@ -678,6 +668,205 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with WidgetsB
     );
   }
 
+  Widget _buildRecommendedProducts() {
+    return Container(
+      padding: EdgeInsets.all(24),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Recommended for you',
+            style: GoogleFonts.poppins(
+              fontSize: 20,
+              fontWeight: FontWeight.w600,
+              color: Colors.black87,
+            ),
+          ),
+          SizedBox(height: 16),
+          Consumer<AppProvider>(
+            builder: (context, provider, child) {
+              // Get 5 random products from the provider
+              final recommendedProducts = provider.getRandomProducts(5);
+
+              if (recommendedProducts.isEmpty) {
+                return Container(
+                  height: 200,
+                  child: Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.recommend,
+                          size: 48,
+                          color: Colors.grey[400],
+                        ),
+                        SizedBox(height: 16),
+                        Text(
+                          'Loading recommendations...',
+                          style: GoogleFonts.poppins(
+                            fontSize: 16,
+                            color: Colors.grey[600],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              }
+
+              return ListView.builder(
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
+                itemCount: recommendedProducts.length,
+                itemBuilder: (context, index) {
+                  final product = recommendedProducts[index];
+                  return _buildRecommendedProductCard(product);
+                },
+              );
+            },
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildRecommendedProductCard(Product product) {
+    return Container(
+      margin: EdgeInsets.only(bottom: 16),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(12),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.05),
+            blurRadius: 10,
+            offset: Offset(0, 2),
+          ),
+        ],
+      ),
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          onTap: () => _navigateToProductDetail(product),
+          borderRadius: BorderRadius.circular(12),
+          child: Padding(
+            padding: EdgeInsets.all(16),
+            child: Row(
+              children: [
+                Container(
+                  width: 80,
+                  height: 80,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8),
+                    color: Colors.grey.shade200,
+                  ),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(8),
+                    child: product.imageUrl.isNotEmpty
+                        ? Image.network(
+                            product.imageUrl,
+                            fit: BoxFit.cover,
+                            errorBuilder: (context, error, stackTrace) {
+                              return Container(
+                                color: Colors.grey[300],
+                                child: Icon(
+                                  Icons.image_not_supported,
+                                  size: 32,
+                                  color: Colors.grey[600],
+                                ),
+                              );
+                            },
+                          )
+                        : Container(
+                            color: Colors.grey[300],
+                            child: Icon(
+                              Icons.image_not_supported,
+                              size: 32,
+                              color: Colors.grey[600],
+                            ),
+                          ),
+                  ),
+                ),
+                SizedBox(width: 16),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        product.productDesc,
+                        style: GoogleFonts.poppins(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.black87,
+                        ),
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      SizedBox(height: 8),
+                      Row(
+                        children: [
+                          Text(
+                            '\$${product.numericPrice.toStringAsFixed(2)}',
+                            style: GoogleFonts.poppins(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                              color: AppConstants.primaryColor,
+                            ),
+                          ),
+                          if (product.hasDiscount) ...[
+                            SizedBox(width: 8),
+                            Container(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 6, vertical: 2),
+                              decoration: BoxDecoration(
+                                color: Colors.red[100],
+                                borderRadius: BorderRadius.circular(4),
+                              ),
+                              child: Text(
+                                product.discount,
+                                style: GoogleFonts.poppins(
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.red[700],
+                                ),
+                              ),
+                            ),
+                          ],
+                        ],
+                      ),
+                      SizedBox(height: 4),
+                      Text(
+                        '${product.sales180Day} sold • ${product.positiveFeedback}',
+                        style: GoogleFonts.poppins(
+                          fontSize: 12,
+                          color: Colors.grey[600],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Icon(
+                  Icons.arrow_forward_ios,
+                  size: 16,
+                  color: Colors.grey.shade600,
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  void _navigateToProductDetail(Product product) {
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+        builder: (context) => ProductDetailScreen(product: product),
+      ),
+    );
+  }
+
   Widget _buildBottomTabs() {
     return Container(
       margin: EdgeInsets.only(top: 24),
@@ -700,7 +889,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with WidgetsB
               ],
             ),
           ),
-          
+
           // Tab Content
           Container(
             padding: EdgeInsets.all(24),
@@ -760,7 +949,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with WidgetsB
     if (url.isNotEmpty) {
       try {
         final success = await WebUrlService.openUrlInNewTab(url);
-        
+
         if (success) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
@@ -769,7 +958,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with WidgetsB
               duration: const Duration(seconds: 2),
             ),
           );
-          
+
           print('Successfully opened affiliate URL: $url');
         } else {
           throw Exception('Failed to open URL');
@@ -796,7 +985,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with WidgetsB
   void _addToFavorites(BuildContext context) async {
     final provider = Provider.of<AppProvider>(context, listen: false);
     await provider.addToFavorites(widget.product);
-    
+
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text('Added ${widget.product.productDesc} to favorites'),
@@ -810,5 +999,100 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with WidgetsB
         ),
       ),
     );
+  }
+
+  Widget _buildGooglePlayButton() {
+    return Container(
+      width: double.infinity,
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          onTap: () => _launchGooglePlayStore(),
+          borderRadius: BorderRadius.circular(12),
+          child: Container(
+            padding: EdgeInsets.symmetric(vertical: 16, horizontal: 24),
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [Colors.green.shade600, Colors.green.shade700],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+              ),
+              borderRadius: BorderRadius.circular(12),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.green.withOpacity(0.3),
+                  blurRadius: 10,
+                  offset: Offset(0, 4),
+                ),
+              ],
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  Icons.play_circle_filled,
+                  color: Colors.white,
+                  size: 28,
+                ),
+                SizedBox(width: 12),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'GET IT ON',
+                      style: GoogleFonts.poppins(
+                        fontSize: 10,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.white.withOpacity(0.8),
+                        letterSpacing: 1.2,
+                      ),
+                    ),
+                    Text(
+                      'Google Play',
+                      style: GoogleFonts.poppins(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ],
+                ),
+                Spacer(),
+                Icon(
+                  Icons.arrow_forward,
+                  color: Colors.white,
+                  size: 24,
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  void _launchGooglePlayStore() {
+    final googlePlayUrl =
+        'https://play.google.com/store/apps/details?id=com.marconlineshopping.humanhairwigs';
+
+    // For web, we'll use the WebUrlService to open in new tab
+    WebUrlService.openUrlInNewTab(googlePlayUrl).then((success) {
+      if (success) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Opening Google Play Store...'),
+            backgroundColor: Colors.green,
+            duration: Duration(seconds: 2),
+          ),
+        );
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Error opening Google Play Store'),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
+    });
   }
 }
