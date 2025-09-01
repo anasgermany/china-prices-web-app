@@ -217,36 +217,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                 ),
               ),
 
-              // Search Help Text
-              AnimatedContainer(
-                duration: const Duration(milliseconds: 300),
-                height: _isSearchBarVisible ? 40 : 0,
-                child: Container(
-                  margin: EdgeInsets.only(bottom: 16),
-                  padding: EdgeInsets.symmetric(horizontal: 20),
-                  child: Row(
-                    children: [
-                      Icon(
-                        Icons.lightbulb_outline,
-                        size: 16,
-                        color: Colors.orange[600],
-                      ),
-                      SizedBox(width: 8),
-                      Expanded(
-                        child: Text(
-                          '💡 Tip: Search for "drones", "dresses", "phones", "shoes" or any product you want!',
-                          style: GoogleFonts.poppins(
-                            fontSize: 14,
-                            color: Colors.grey[600],
-                            fontWeight: FontWeight.w500,
-                            fontStyle: FontStyle.italic,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
+
 
               // Search Results Header
               if (_searchController.text.isNotEmpty) ...[
